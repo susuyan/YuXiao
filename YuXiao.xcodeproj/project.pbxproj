@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,6 +14,7 @@
 		106208832C6D911900B1FC3A /* YuXiaoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 106208822C6D911900B1FC3A /* YuXiaoTests.swift */; };
 		1062088D2C6D911900B1FC3A /* YuXiaoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1062088C2C6D911900B1FC3A /* YuXiaoUITests.swift */; };
 		1062088F2C6D911900B1FC3A /* YuXiaoUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1062088E2C6D911900B1FC3A /* YuXiaoUITestsLaunchTests.swift */; };
+		1062089D2C6D959800B1FC3A /* HorizonCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 1062089C2C6D959800B1FC3A /* HorizonCalendar */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1062089D2C6D959800B1FC3A /* HorizonCalendar in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,6 +145,9 @@
 			dependencies = (
 			);
 			name = YuXiao;
+			packageProductDependencies = (
+				1062089C2C6D959800B1FC3A /* HorizonCalendar */,
+			);
 			productName = YuXiao;
 			productReference = 1062086E2C6D911700B1FC3A /* YuXiao.app */;
 			productType = "com.apple.product-type.application";
@@ -215,6 +220,9 @@
 				Base,
 			);
 			mainGroup = 106208652C6D911700B1FC3A;
+			packageReferences = (
+				1062089B2C6D959800B1FC3A /* XCLocalSwiftPackageReference "../HorizonCalendar" */,
+			);
 			productRefGroup = 1062086F2C6D911700B1FC3A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -588,6 +596,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		1062089B2C6D959800B1FC3A /* XCLocalSwiftPackageReference "../HorizonCalendar" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../HorizonCalendar;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1062089C2C6D959800B1FC3A /* HorizonCalendar */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = HorizonCalendar;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 106208662C6D911700B1FC3A /* Project object */;
 }
