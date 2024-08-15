@@ -10,7 +10,7 @@ import HorizonCalendar
 
 struct ContentView: View {
     @State var selectedDate: Date? = Date() // 默认选择今天
-    @State var selectedShift: String? = nil
+    @State var selectedShift: (name: String, time: String)? = nil
     
     var body: some View {
         NavigationSplitView{
@@ -19,7 +19,7 @@ struct ContentView: View {
                     VStack(alignment: .leading, content: {
                         Text("今日 \(formattedDate(selectedDate))")
                             .font(.headline)
-                        Text(selectedShift)
+                        Text("\(selectedShift.name) (\(selectedShift.time))")
                             .font(.title)
                             .fontWeight(.medium)
                             .foregroundColor(.blue)
@@ -38,6 +38,26 @@ struct ContentView: View {
                     monthsLayout: .vertical(options: VerticalMonthsLayoutOptions()),
                     dataDependency: nil
                 )
+                .monthHeaders({ month in
+                    let chineseMonths = [
+                        1: "一月",
+                        2: "二月",
+                        3: "三月",
+                        4: "四月",
+                        5: "五月",
+                        6: "六月",
+                        7: "七月",
+                        8: "八月",
+                        9: "九月",
+                        10: "十月",
+                        11: "十一月",
+                        12: "十二月"
+                    ]
+                    
+                    Text("\(chineseMonths[month.month] ?? "")")
+                        .font(.title)                                        
+                    
+                })
                 .days { [selectedDate] day in
                     let date = calendar.date(from: day.components)
                     let borderColor: UIColor = date == selectedDate ? .systemRed : .systemBlue
@@ -49,11 +69,11 @@ struct ContentView: View {
                         }
                         
                         // 班次规则
-                        let shiftTypes: [(name: String, color: Color)] = [
-                            ("下夜", Color.blue.opacity(0.2)),
-                            ("白班", Color.green.opacity(0.2)),
-                            ("中班", Color.orange.opacity(0.2)),
-                            ("夜班", Color.purple.opacity(0.2))
+                        let shiftTypes: [(name: String, color: Color, time: String)] = [
+                            ("下夜", Color.blue.opacity(0.2),"休息"),
+                            ("白班", Color.green.opacity(0.2),"08:00 - 16:00"),
+                            ("中班", Color.orange.opacity(0.2),"16:00 - 23:00"),
+                            ("夜班", Color.purple.opacity(0.2),"12:00 - 次日 08:00")
                         ]
                         
                         // 计算当前日期与每月1号的距离
@@ -85,7 +105,12 @@ struct ContentView: View {
                     // 根据选中日期计算班次
                     if let date = selectedDate {
                         let dayComponent = calendar.component(.day, from: date)
-                        let shiftTypes = ["下夜", "白班", "中班", "夜班"]
+                        let shiftTypes = [
+                            ("下夜", "休息"),
+                            ("白班", "08:00 - 16:00"),
+                            ("中班", "16:00 - 23:00"),
+                            ("夜班", "12:00 - 次日 08:00")
+                        ]
                         let dayOffset = dayComponent - 1
                         self.selectedShift = shiftTypes[dayOffset % shiftTypes.count]
                     }
@@ -94,7 +119,12 @@ struct ContentView: View {
                     // 初始化时设置当前日期的班次
                     if let today = selectedDate {
                         let dayComponent = calendar.component(.day, from: today)
-                        let shiftTypes = ["下夜", "白班", "中班", "夜班"]
+                        let shiftTypes = [
+                            ("下夜", "休息"),
+                            ("白班", "08:00 - 16:00"),
+                            ("中班", "16:00 - 23:00"),
+                            ("夜班", "12:00 - 次日 08:00")
+                        ]
                         let dayOffset = dayComponent - 1
                         self.selectedShift = shiftTypes[dayOffset % shiftTypes.count]
                     }
